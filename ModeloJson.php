@@ -7,27 +7,27 @@ class Datos extends Conexion{
     ///////////////////////////////////////
     /////// CREAR USUARIOS
     ///////////////////////////////////////
-    public function createUsuario($tabla){
+    public function crearUsuario($datosModel, $tabla){
         $stmt= Conexion::conectar()->prepare("INSERT INTO $tabla (usuario, password, role, mail) VALUES (:usuario, 
-        :password, :role, :mail)");
+        :password, :role, :email)");
 
-        $usuario= "Vivi";
-        $password= "123456";
-        $role= "administrador";
-        $mail= "vivi@curso.com";
+        // $usuario= "Vivi";
+        // $password= "123456";
+        // $role= "administrador";
+        // $mail= "vivi@curso.com";
 
-
-        $stmt-> bindParam(":usuario", $usuario, PDO::PARAM_STR);
-        $stmt-> bindParam(":password", $password, PDO::PARAM_STR);
-        $stmt-> bindParam("role", $role, PDO::PARAM_STR);
-        $stmt-> bindParam("mail", $mail, PDO::PARAM_STR);
+        $stmt-> bindParam(":usuario", $datosModel["usuario"], PDO::PARAM_STR);
+        $stmt-> bindParam(":password", $datosModel["password"], PDO::PARAM_STR);
+        $stmt-> bindParam("role", $datosModel["role"], PDO::PARAM_STR);
+        $stmt-> bindParam("email", $datosModel["email"], PDO::PARAM_STR);
 
 
         if($stmt -> execute()){
-            echo "Registro EXitoso";
+            echo "Registro Exitoso";
+            return true;
         }else{
             echo "No se puede hacer el registro";
-
+            return false;
         }
     }
 
@@ -87,16 +87,16 @@ class Datos extends Conexion{
     ///////////////////////////////////////
     /////// LOGIN
     ///////////////////////////////////////
-    public function loginUsuarios($tabla){
+    public function loginUsuarios($datosModel, $tabla){
 
         $stmt= Conexion::conectar()->prepare("SELECT id, usuario, password, role, mail FROM $tabla WHERE mail= :mail AND 
         password= :password");
 
-        $mail= "pablo@curso.com";
-        $password= "123456";
+        // $mail= "pablo@curso.com";
+        // $password= "123456";
 
-        $stmt->bindParam(":mail", $mail);
-        $stmt->bindParam(":password", $password);
+        $stmt->bindParam(":mail", $datosModel["mail"]);
+        $stmt->bindParam(":password", $datosModel["password"]);
 
         $stmt->execute();
 
@@ -149,18 +149,18 @@ class Datos extends Conexion{
     ///////////////////////////////////////
 
     //  CREAR
-    public function crearCategoria($tabla){
+    public function crearCategoria($datosModel, $tabla){
         $stmt= Conexion::conectar()->prepare("INSERT INTO $tabla (titulo) VALUES (:titulo)");
 
         // variables de apoyo
-        $titulo= "MONITOR";
+       // $titulo= "MONITOR";
 
-        $stmt-> bindParam(":titulo", $titulo, PDO::PARAM_STR);
+        $stmt-> bindParam(":titulo", $datosModel["titulo"], PDO::PARAM_STR);
 
         if($stmt -> execute()){
-            echo "Registro EXitoso";
+            echo "Registro Exitoso de categoria";
         }else{
-            echo "No se puede hacer el registro";
+            echo "No se puede crear la categoria";
         }
     }
 
@@ -207,15 +207,16 @@ class Datos extends Conexion{
     }
 
     // ACTUALIZAR
-    public function actualizarCategoria($tabla){
+    public function actualizarCategoria($titulo, $tabla){
         $stmt= Conexion::conectar()->prepare("UPDATE $tabla SET titulo = :titulo WHERE id= :id");
 
         // variables de apoyo
-        $id= "18";
-        $titulo= "MONITORES";
+        // $id= "18";
+        // $titulo= "MONITORES";
 
-        $stmt-> bindParam(":titulo", $titulo, PDO::PARAM_STR);
-        $stmt-> bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt-> bindParam(":id", $titulo["id"], PDO::PARAM_INT);
+        $stmt-> bindParam(":titulo", $titulo["titulo"], PDO::PARAM_STR);
+
 
 
         if($stmt -> execute()){
@@ -229,7 +230,7 @@ class Datos extends Conexion{
     // BORRAR
     public function borrarCategoria($id, $tabla){
         $stmt= Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id= :id");
-        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->bindParam(":id", $id["id"], PDO::PARAM_INT);
 
         if($stmt -> execute()){
             echo "La categoria se borro";
@@ -243,28 +244,30 @@ class Datos extends Conexion{
     ///////////////////////////////////////
 
     //CREAR VENTA
-    public function crearVenta($tabla){
+    public function crearVenta($datosModel,$tabla){
   
         $stmt= Conexion::conectar()->prepare("INSERT INTO $tabla (usuario, producto, imagen, costo, fecha) 
         VALUES(:usuario, :producto, :imagen, :costo, :fecha)");
 
         //variables de apoyo
-        $usuario= 12;
-        $producto= "Mica Cristal Templado";
-        $imagen= "views/images/articulos/articulo967.jpg";
-        $costo="165.00";
-        $fecha="2020-06-11 17:26:44";
+        // $usuario= 12;
+        // $producto= "Mica Cristal Templado";
+        // $imagen= "views/images/articulos/articulo967.jpg";
+        // $costo="165.00";
+        // $fecha="2020-06-11 17:26:44";
         
-        $stmt->bindParam(":usuario", $usuario, PDO::PARAM_INT);
-        $stmt->bindParam(":producto", $producto, PDO::PARAM_STR);
-        $stmt->bindParam(":imagen", $imagen, PDO::PARAM_STR);
-        $stmt->bindParam(":costo", $costo, PDO::PARAM_INT);
-        $stmt->bindParam(":fecha", $fecha, PDO::PARAM_STR);
+        $stmt->bindParam(":usuario", $datosModel["usuario"], PDO::PARAM_INT);
+        $stmt->bindParam(":producto", $datosModel["producto"], PDO::PARAM_STR);
+        $stmt->bindParam(":imagen", $datosModel["imagen"], PDO::PARAM_STR);
+        $stmt->bindParam(":costo", $datosModel["costo"], PDO::PARAM_INT);
+        $stmt->bindParam(":fecha", $datosModel["fecha"], PDO::PARAM_STR);
 
         if($stmt -> execute()){
             echo "La venta se realizo correctamente";
+            return true;
         }else{
             echo "La venta no se realizo correctamente";
+            return false;
         }
     }
 
@@ -287,6 +290,7 @@ class Datos extends Conexion{
 
         // verificar
         echo' 
+        <h3> VENTAS </h3>
         <table>
         <tr>
         <td><strong>id</strong></td>
@@ -401,6 +405,7 @@ class Datos extends Conexion{
         $productos= array();
 
         echo' 
+        <h3>PRODUCTOS</h3>
         <table>
         <tr>
         <td><strong>id</strong></td>
@@ -445,20 +450,21 @@ class Datos extends Conexion{
 
     public function eliminarProducto($id, $tabla){
         $stmt= Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
-        $stmt -> bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt -> bindParam(":id", $id["id"], PDO::PARAM_INT);
 
         if($stmt -> execute()){
             echo'Producto eliminado correctamente';
+            return true;
         }else{
             echo'Producto no se elimino correctamente';
+            return false;
 
         }
 
     }
 }
 
-
-$obj= new Datos();
-$obj->eliminarProducto(17,"productos");
+// $obj= new Datos();
+// $obj->eliminarProducto(17,"productos");
 
 ?>
