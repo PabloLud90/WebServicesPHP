@@ -23,10 +23,10 @@ class Datos extends Conexion{
 
 
         if($stmt -> execute()){
-            echo "Registro Exitoso";
+           // echo "Registro Exitoso";
             return true;
         }else{
-            echo "No se puede hacer el registro";
+            //echo "No se puede hacer el registro";
             return false;
         }
     }
@@ -47,16 +47,16 @@ class Datos extends Conexion{
         $usuarios = array();
 
         // verificar
-        echo' 
-        <table>
-        <tr>
-        <td><strong>id</strong></td>
-        <td><strong>usuarios</strong></td>
-        <td><strong>mail</strong></td>
-        <td><strong>password</strong></td>
-        <td><strong>role</strong></td>
+        // echo' 
+        // <table>
+        // <tr>
+        // <td><strong>id</strong></td>
+        // <td><strong>usuarios</strong></td>
+        // <td><strong>mail</strong></td>
+        // <td><strong>password</strong></td>
+        // <td><strong>role</strong></td>
 
-        ';
+        // ';
 
         while($fila = $stmt->fetch(PDO::FETCH_BOUND)){
             $user= array();
@@ -69,17 +69,17 @@ class Datos extends Conexion{
 
             array_push($usuarios, $user);
 
-            echo'
-            <tr>
-            <td>'.$user['id'].'</td>
-            <td>'.$user['usuario'].'</td>
-            <td>'.$user['mail'].'</td>
-            <td>'.$user['password'].'</td>
-            <td>'.$user['role'].'</td>
-            ';
+            // echo'
+            // <tr>
+            // <td>'.$user['id'].'</td>
+            // <td>'.$user['usuario'].'</td>
+            // <td>'.$user['mail'].'</td>
+            // <td>'.$user['password'].'</td>
+            // <td>'.$user['role'].'</td>
+            // ';
         }
 
-        echo'</table>';
+        // echo'</table>';
 
         return $usuarios;
 
@@ -107,16 +107,16 @@ class Datos extends Conexion{
         $stmt->bindColumn("mail", $mail);
 
              // verificar
-        echo' 
-        <table>
-        <tr>
-        <td><strong>id</strong></td>
-        <td><strong>usuarios</strong></td>
-        <td><strong>mail</strong></td>
-        <td><strong>password</strong></td>
-        <td><strong>role</strong></td>
+        // echo' 
+        // <table>
+        // <tr>
+        // <td><strong>id</strong></td>
+        // <td><strong>usuarios</strong></td>
+        // <td><strong>mail</strong></td>
+        // <td><strong>password</strong></td>
+        // <td><strong>role</strong></td>
 
-        ';
+        // ';
 
         while($fila = $stmt->fetch(PDO::FETCH_BOUND)){
             $user= array();
@@ -127,14 +127,14 @@ class Datos extends Conexion{
             $user["role"]= utf8_encode($role);
 
 
-            echo'
-            <tr>
-            <td>'.$user['id'].'</td>
-            <td>'.$user['usuario'].'</td>
-            <td>'.$user['mail'].'</td>
-            <td>'.$user['password'].'</td>
-            <td>'.$user['role'].'</td>
-            ';
+            // echo'
+            // <tr>
+            // <td>'.$user['id'].'</td>
+            // <td>'.$user['usuario'].'</td>
+            // <td>'.$user['mail'].'</td>
+            // <td>'.$user['password'].'</td>
+            // <td>'.$user['role'].'</td>
+            // ';
         }
         if(!empty($user)){
             return $user;
@@ -158,9 +158,11 @@ class Datos extends Conexion{
         $stmt-> bindParam(":titulo", $datosModel["titulo"], PDO::PARAM_STR);
 
         if($stmt -> execute()){
-            echo "Registro Exitoso de categoria";
+           // echo "Registro Exitoso de categoria";
+            return true;
         }else{
-            echo "No se puede crear la categoria";
+           // echo "No se puede crear la categoria";
+            return false;
         }
     }
 
@@ -176,12 +178,12 @@ class Datos extends Conexion{
         $categorias = array();
 
         // verificar
-        echo' 
-        <table>
-        <tr>
-        <td><strong>id</strong></td>
-        <td><strong>titulo</strong></td>
-        ';
+        // echo' 
+        // <table>
+        // <tr>
+        // <td><strong>id</strong></td>
+        // <td><strong>titulo</strong></td>
+        // ';
 
         while($fila = $stmt->fetch(PDO::FETCH_BOUND)){
             $cat= array();
@@ -192,15 +194,15 @@ class Datos extends Conexion{
 
             array_push($categorias, $cat);
 
-            echo'
-            <tr>
-            <td>'.$cat['id'].'</td>
-            <td>'.$cat['titulo'].'</td>
+            // echo'
+            // <tr>
+            // <td>'.$cat['id'].'</td>
+            // <td>'.$cat['titulo'].'</td>
     
-            ';
+            // ';
         }
 
-        echo'</table>';
+        // echo'</table>';
 
         return $categorias;
         
@@ -220,9 +222,11 @@ class Datos extends Conexion{
 
 
         if($stmt -> execute()){
-            echo "Actualizado con Exito";
+            // echo "Actualizado con Exito";
+            return true;
         }else{
-            echo "No se puede hacer la actualizacion";
+            // echo "No se puede hacer la actualizacion";
+            return false;
         }
     }
 
@@ -233,9 +237,11 @@ class Datos extends Conexion{
         $stmt->bindParam(":id", $id["id"], PDO::PARAM_INT);
 
         if($stmt -> execute()){
-            echo "La categoria se borro";
+            // echo "La categoria se borro";
+            return true;
         }else{
-            echo "La categoria no puede borrarse";
+            // echo "La categoria no puede borrarse";
+            return false;
         }
     }
 
@@ -263,10 +269,10 @@ class Datos extends Conexion{
         $stmt->bindParam(":fecha", $datosModel["fecha"], PDO::PARAM_STR);
 
         if($stmt -> execute()){
-            echo "La venta se realizo correctamente";
+           // echo "La venta se realizo correctamente";
             return true;
         }else{
-            echo "La venta no se realizo correctamente";
+            // echo "La venta no se realizo correctamente";
             return false;
         }
     }
@@ -289,17 +295,17 @@ class Datos extends Conexion{
         $ventas = array();
 
         // verificar
-        echo' 
-        <h3> VENTAS </h3>
-        <table>
-        <tr>
-        <td><strong>id</strong></td>
-        <td><strong>usuario</strong></td>
-        <td><strong>producto</strong></td>
-        <td><strong>imagen</strong></td>
-        <td><strong>costo</strong></td>
-        <td><strong>fecha</strong></td>
-        ';
+        // echo' 
+        // <h3> VENTAS </h3>
+        // <table>
+        // <tr>
+        // <td><strong>id</strong></td>
+        // <td><strong>usuario</strong></td>
+        // <td><strong>producto</strong></td>
+        // <td><strong>imagen</strong></td>
+        // <td><strong>costo</strong></td>
+        // <td><strong>fecha</strong></td>
+        // ';
 
         while($fila = $stmt->fetch(PDO::FETCH_BOUND)){
             $venta= array();
@@ -313,18 +319,18 @@ class Datos extends Conexion{
 
             array_push($ventas, $venta);
 
-            echo'
-            <tr>
-            <td>'.$venta['id'].'</td>
-            <td>'.$venta['usuario'].'</td>
-            <td>'.$venta['producto'].'</td>
-            <td>'.$venta['imagen'].'</td>
-            <td>'.$venta['costo'].'</td>
-            <td>'.$venta['fecha'].'</td>
-            ';
+            // echo'
+            // <tr>
+            // <td>'.$venta['id'].'</td>
+            // <td>'.$venta['usuario'].'</td>
+            // <td>'.$venta['producto'].'</td>
+            // <td>'.$venta['imagen'].'</td>
+            // <td>'.$venta['costo'].'</td>
+            // <td>'.$venta['fecha'].'</td>
+            // ';
         }
 
-        echo'</table>';
+        // echo'</table>';
 
         return $ventas;
     }
@@ -344,16 +350,16 @@ class Datos extends Conexion{
         $ventas = array();
 
         // verificar
-        echo' 
-        <table>
-        <tr>
-        <td><strong>id</strong></td>
-        <td><strong>usuario</strong></td>
-        <td><strong>producto</strong></td>
-        <td><strong>imagen</strong></td>
-        <td><strong>costo</strong></td>
-        <td><strong>fecha</strong></td>
-        ';
+        // echo' 
+        // <table>
+        // <tr>
+        // <td><strong>id</strong></td>
+        // <td><strong>usuario</strong></td>
+        // <td><strong>producto</strong></td>
+        // <td><strong>imagen</strong></td>
+        // <td><strong>costo</strong></td>
+        // <td><strong>fecha</strong></td>
+        // ';
 
         while($fila = $stmt->fetch(PDO::FETCH_BOUND)){
             $venta= array();
@@ -367,18 +373,18 @@ class Datos extends Conexion{
 
             array_push($ventas, $venta);
 
-            echo'
-            <tr>
-            <td>'.$venta['id'].'</td>
-            <td>'.$venta['usuario'].'</td>
-            <td>'.$venta['producto'].'</td>
-            <td>'.$venta['imagen'].'</td>
-            <td>'.$venta['costo'].'</td>
-            <td>'.$venta['fecha'].'</td>
-            ';
+            // echo'
+            // <tr>
+            // <td>'.$venta['id'].'</td>
+            // <td>'.$venta['usuario'].'</td>
+            // <td>'.$venta['producto'].'</td>
+            // <td>'.$venta['imagen'].'</td>
+            // <td>'.$venta['costo'].'</td>
+            // <td>'.$venta['fecha'].'</td>
+            // ';
         }
 
-        echo'</table>';
+        // echo'</table>';
 
         return $ventas;
     }
@@ -404,19 +410,19 @@ class Datos extends Conexion{
 
         $productos= array();
 
-        echo' 
-        <h3>PRODUCTOS</h3>
-        <table>
-        <tr>
-        <td><strong>id</strong></td>
-        <td><strong>titulo</strong></td>
-        <td><strong>descripcion</strong></td>
-        <td><strong>contenido</strong></td>
-        <td><strong>imagen</strong></td>
-        <td><strong>precio</strong></td>
-        <td><strong>calificacion</strong></td>
-        <td><strong>categoria</strong></td>
-        ';
+        // echo' 
+        // <h3>PRODUCTOS</h3>
+        // <table>
+        // <tr>
+        // <td><strong>id</strong></td>
+        // <td><strong>titulo</strong></td>
+        // <td><strong>descripcion</strong></td>
+        // <td><strong>contenido</strong></td>
+        // <td><strong>imagen</strong></td>
+        // <td><strong>precio</strong></td>
+        // <td><strong>calificacion</strong></td>
+        // <td><strong>categoria</strong></td>
+        // ';
 
         while($fila = $stmt->fetch(PDO::FETCH_BOUND)){
             $producto= array();
@@ -431,20 +437,20 @@ class Datos extends Conexion{
 
             array_push($productos, $producto);
 
-            echo'
-            <tr>
-            <td>'.$producto['id'].'</td>
-            <td>'.$producto['titulo'].'</td>
-            <td>'.$producto['descricion'].'</td>
-            <td>'.$producto['contenido'].'</td>
-            <td>'.$producto['imagen'].'</td>
-            <td>'.$producto['precio'].'</td>
-            <td>'.$producto['calificacion'].'</td>
-            <td>'.$producto['categoria'].'</td>
-            ';
+            // echo'
+            // <tr>
+            // <td>'.$producto['id'].'</td>
+            // <td>'.$producto['titulo'].'</td>
+            // <td>'.$producto['descricion'].'</td>
+            // <td>'.$producto['contenido'].'</td>
+            // <td>'.$producto['imagen'].'</td>
+            // <td>'.$producto['precio'].'</td>
+            // <td>'.$producto['calificacion'].'</td>
+            // <td>'.$producto['categoria'].'</td>
+            // ';
         }
 
-        echo'</table>';
+       // echo'</table>';
         return $productos;
     }
 
@@ -453,10 +459,10 @@ class Datos extends Conexion{
         $stmt -> bindParam(":id", $id["id"], PDO::PARAM_INT);
 
         if($stmt -> execute()){
-            echo'Producto eliminado correctamente';
+           // echo'Producto eliminado correctamente';
             return true;
         }else{
-            echo'Producto no se elimino correctamente';
+            // echo'Producto no se elimino correctamente';
             return false;
 
         }

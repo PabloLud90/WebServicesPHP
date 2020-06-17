@@ -137,5 +137,5 @@ class ControladorJson{
 }
 
 $obj= new ControladorJson();
-$obj-> eliminarProductoController(15);
+$obj-> loginUsuarioController("mishel@curso.com", "123456");
 ?>
